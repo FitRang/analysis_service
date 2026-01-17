@@ -21,19 +21,19 @@ jobs:
           apollo-key: ${{ secrets.APOLLO_KEY }}
           graph-ref: ${{ secrets.APOLLO_GRAPH_REF }}
           name: analysis_service
-          schema: ./schema.graphql
+          schema: ./graph/schema.graphqls
 
       - uses: apollographql-gh-actions/rover-subgraph-lint@v1
         with:
           apollo-key: ${{ secrets.APOLLO_KEY }}
           graph-ref: ${{ secrets.APOLLO_GRAPH_REF }}
           name: analysis_service
-          schema: ./schema.graphql
+          schema: ./graph/schema.graphqls
 
       - uses: apollographql-gh-actions/rover-subgraph-publish@v1
         with:
           apollo-key: ${{ secrets.APOLLO_KEY }}
           graph-ref: ${{ secrets.APOLLO_GRAPH_REF }}
           name: analysis_service
-          schema: ./schema.graphql
+          schema: ./graph/schema.graphqls
           routing-url: http://analysis_service:8080
