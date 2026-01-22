@@ -11,7 +11,9 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/Foxtrot-14/FitRang/analysis-service/graph"
+	"github.com/Foxtrot-14/FitRang/analysis-service/middleware"
 	"github.com/Foxtrot-14/FitRang/analysis-service/proto"
+	"github.com/Foxtrot-14/FitRang/analysis-service/services"
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
@@ -25,7 +27,7 @@ func main() {
 
 	srv := handler.New(graph.NewExecutableSchema(graph.Config{
 		Resolvers: &graph.Resolver{
-			ProfileClient: proto.NewProfileClient(),
+			S: services.NewService(proto.NewProfileClient()),
 		},
 	}))
 
@@ -41,7 +43,10 @@ func main() {
 	})
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", srv)
+	http.Handle(
+		"/query",
+		middleware.AuthMiddleware(srv),
+	)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

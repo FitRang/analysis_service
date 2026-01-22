@@ -13,17 +13,17 @@ type Verdict {
   suitability: String!
 }
 
-type VerdictInput {
+input VerdictInput {
   username: String!
   product: String!
 }
 
-type MyVerdictInput {
+input MyVerdictInput {
   product: String!
 }
 
 type Query {
   getProfiles: [Profile!]!
-  getVerdict(VerdictInput!): Verdict!
-  getMyVerdict(MyVerdictInput!): Verdict!
+  getVerdict(input: VerdictInput!): Verdict!
+  getMyVerdict(input: MyVerdictInput!): Verdict!
 }

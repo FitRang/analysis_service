@@ -9,19 +9,22 @@ import (
 	"context"
 	"fmt"
 
-	"test/fitrang-main/analysis_service/graph/model"
+	model1 "github.com/Foxtrot-14/FitRang/analysis-service/graph/model"
 )
 
 // GetProfiles is the resolver for the getProfiles field.
-func (r *queryResolver) GetProfiles(ctx context.Context) ([]*model.Profile, error) {
-	panic(fmt.Errorf("not implemented: GetProfiles - getProfiles"))
-	return r.GetProfiles(ctx)
+func (r *queryResolver) GetProfiles(ctx context.Context) ([]*model1.Profile, error) {
+	return r.Resolver.S.GetProfiles(ctx)
 }
 
 // GetVerdict is the resolver for the getVerdict field.
-func (r *queryResolver) GetVerdict(ctx context.Context, username string) (*model.Verdict, error) {
+func (r *queryResolver) GetVerdict(ctx context.Context, input model1.VerdictInput) (*model1.Verdict, error) {
 	panic(fmt.Errorf("not implemented: GetVerdict - getVerdict"))
-	return r.GetVerdict(ctx)
+}
+
+// GetMyVerdict is the resolver for the getMyVerdict field.
+func (r *queryResolver) GetMyVerdict(ctx context.Context, input model1.MyVerdictInput) (*model1.Verdict, error) {
+	panic(fmt.Errorf("not implemented: GetMyVerdict - getMyVerdict"))
 }
 
 // Query returns QueryResolver implementation.

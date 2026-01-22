@@ -1,6 +1,8 @@
 package graph
 
-import "github.com/Foxtrot-14/FitRang/analysis-service/proto"
+import (
+	"github.com/Foxtrot-14/FitRang/analysis-service/services"
+)
 
 //go:generate go tool gqlgen generate
 // This file will not be regenerated automatically.
@@ -9,5 +11,5 @@ import "github.com/Foxtrot-14/FitRang/analysis-service/proto"
 // here.
 
 type Resolver struct {
-	ProfileClient *proto.ProfileClient
+	S *services.Service
 }
