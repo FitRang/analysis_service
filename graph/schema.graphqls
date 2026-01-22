@@ -1,15 +1,7 @@
-enum AccessStatus {
-  YES
-  NO
-  REQUESTED
-  OWNER
-}
-
 type Profile {
   id: ID!
   fullName: String!
   username: String!
-  accessStatus: AccessStatus!
   profileUrl: String
   createdAt: String!
   updatedAt: String!
@@ -21,7 +13,17 @@ type Verdict {
   suitability: String!
 }
 
+type VerdictInput {
+  username: String!
+  product: String!
+}
+
+type MyVerdictInput {
+  product: String!
+}
+
 type Query {
   getProfiles: [Profile!]!
-  getVerdict(username: String!): Verdict!
+  getVerdict(VerdictInput!): Verdict!
+  getMyVerdict(MyVerdictInput!): Verdict!
 }

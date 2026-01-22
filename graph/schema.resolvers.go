@@ -15,11 +15,13 @@ import (
 // GetProfiles is the resolver for the getProfiles field.
 func (r *queryResolver) GetProfiles(ctx context.Context) ([]*model.Profile, error) {
 	panic(fmt.Errorf("not implemented: GetProfiles - getProfiles"))
+	return r.GetProfiles(ctx)
 }
 
 // GetVerdict is the resolver for the getVerdict field.
 func (r *queryResolver) GetVerdict(ctx context.Context, username string) (*model.Verdict, error) {
 	panic(fmt.Errorf("not implemented: GetVerdict - getVerdict"))
+	return r.GetVerdict(ctx)
 }
 
 // Query returns QueryResolver implementation.

@@ -4,17 +4,18 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"test/fitrang-main/analysis_service/graph"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/99designs/gqlgen/graphql/handler/lru"
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/Foxtrot-14/FitRang/analysis-service/graph"
+	"github.com/Foxtrot-14/FitRang/analysis-service/proto"
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
-const defaultPort = "8080"
+const defaultPort = "8085"
 
 func main() {
 	port := os.Getenv("PORT")
@@ -22,7 +23,11 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	srv := handler.New(graph.NewExecutableSchema(graph.Config{
+		Resolvers: &graph.Resolver{
+			ProfileClient: proto.NewProfileClient(),
+		},
+	}))
 
 	srv.AddTransport(transport.Options{})
 	srv.AddTransport(transport.GET{})
