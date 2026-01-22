@@ -11,8 +11,8 @@ import (
 
 func SendRequest(
 	ctx context.Context,
-	user Profile,
-	dossier Dossier,
+	user string,
+	dossier string,
 	product string,
 ) (string, error) {
 	godotenv.Load(".env")

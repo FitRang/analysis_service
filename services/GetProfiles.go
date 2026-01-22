@@ -23,12 +23,13 @@ func (s *Service) GetProfiles(
 	for _, prof := range resp.Profile {
 		profileURL := prof.ProfileUrl
 		result = append(result, &model.Profile{
-			ID:         prof.Id,
-			FullName:   prof.FullName,
-			Username:   prof.Username,
-			ProfileURL: &profileURL,
-			CreatedAt:  prof.CreatedAt,
-			UpdatedAt:  prof.UpdatedAt,
+			ID:           prof.Id,
+			FullName:     prof.FullName,
+			Username:     prof.Username,
+			ProfileURL:   &profileURL,
+			AccessStatus: model.AccessStatusYes,
+			CreatedAt:    prof.CreatedAt,
+			UpdatedAt:    prof.UpdatedAt,
 		})
 	}
 

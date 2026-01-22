@@ -16,7 +16,7 @@ Instructions:
 6. Be critical and honest no need for positive analysis always.
 7. The user's color preferences matter but not too much, so keep that in consideration but not while calculating score.
 8. Be bold and suggest something that they may not have tried but will look good on them.
-9. The response will be in json format first parent object "verdict", within it: analysis, score and details.
+9. The response will be in json format first parent object "verdict", within it: analysis, score and suitability.
 10. Directly give the json without anything else.
 
 --- PROFILE ---

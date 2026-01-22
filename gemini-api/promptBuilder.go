@@ -1,41 +1,28 @@
 package geminiapi
 
 import (
-	"encoding/json"
+	_ "embed"
 	"os"
 	"strings"
 )
 
+//go:embed prompt.txt
+var promptTemplate string
+
 func promptBuilder(
-	profile Profile,
-	dossier Dossier,
+	profile string,
+	dossier string,
 	product string,
 ) (string, error) {
-	template, err := os.ReadFile("prompt.txt")
-	if err != nil {
-		return "", err
-	}
-	userStr, err := ToPrettyJSON(profile)
+	template, err := os.ReadFile(promptTemplate)
 	if err != nil {
 		return "", err
 	}
 
-	dossierStr, err := ToPrettyJSON(dossier)
-	if err != nil {
-		return "", err
-	}
 	replacer := strings.NewReplacer(
-		"{user}", userStr,
-		"{dossier}", dossierStr,
+		"{user}", profile,
+		"{dossier}", dossier,
 		"{product}", product,
 	)
 	return replacer.Replace(string(template)), nil
-}
-
-func ToPrettyJSON(v any) (string, error) {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		return "", err
-	}
-	return string(b), nil
 }

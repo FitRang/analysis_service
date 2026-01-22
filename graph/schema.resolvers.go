@@ -7,7 +7,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	model1 "github.com/Foxtrot-14/FitRang/analysis-service/graph/model"
 )
@@ -19,12 +18,12 @@ func (r *queryResolver) GetProfiles(ctx context.Context) ([]*model1.Profile, err
 
 // GetVerdict is the resolver for the getVerdict field.
 func (r *queryResolver) GetVerdict(ctx context.Context, input model1.VerdictInput) (*model1.Verdict, error) {
-	panic(fmt.Errorf("not implemented: GetVerdict - getVerdict"))
+	return r.Resolver.S.GetVerdict(ctx, input)
 }
 
 // GetMyVerdict is the resolver for the getMyVerdict field.
 func (r *queryResolver) GetMyVerdict(ctx context.Context, input model1.MyVerdictInput) (*model1.Verdict, error) {
-	panic(fmt.Errorf("not implemented: GetMyVerdict - getMyVerdict"))
+	return r.Resolver.S.GetMyVerdict(ctx, input)
 }
 
 // Query returns QueryResolver implementation.

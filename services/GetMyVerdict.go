@@ -8,15 +8,15 @@ import (
 	"github.com/Foxtrot-14/FitRang/analysis-service/graph/model"
 )
 
-type verdictWrapper struct {
-	Verdict model.Verdict `json:"verdict"`
-}
-
-func (s *Service) GetVerdict(
+func (s *Service) GetMyVerdict(
 	ctx context.Context,
-	input model.VerdictInput,
+	input model.MyVerdictInput,
 ) (*model.Verdict, error) {
-	resp, err := s.p.GetDossierByUsername(ctx, input.Username)
+	email, err := getEmailFromContext(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := s.p.GetDossierByEmail(ctx, email)
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (s *Service) GetVerdict(
 
 	raw, err := geminiapi.SendRequest(
 		ctx,
-		input.Username,
+		"for me",
 		string(dossierJSON),
 		input.Product,
 	)
