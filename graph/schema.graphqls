@@ -1,7 +1,15 @@
+enum AccessStatus {
+  YES
+  NO
+  REQUESTED
+  OWNER
+}
+
 type Profile {
   id: ID!
   fullName: String!
   username: String!
+  accessStatus: AccessStatus!
   profileUrl: String
   createdAt: String!
   updatedAt: String!

@@ -47,12 +47,13 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Profile struct {
-		CreatedAt  func(childComplexity int) int
-		FullName   func(childComplexity int) int
-		ID         func(childComplexity int) int
-		ProfileURL func(childComplexity int) int
-		UpdatedAt  func(childComplexity int) int
-		Username   func(childComplexity int) int
+		AccessStatus func(childComplexity int) int
+		CreatedAt    func(childComplexity int) int
+		FullName     func(childComplexity int) int
+		ID           func(childComplexity int) int
+		ProfileURL   func(childComplexity int) int
+		UpdatedAt    func(childComplexity int) int
+		Username     func(childComplexity int) int
 	}
 
 	Query struct {
@@ -93,6 +94,12 @@ func (e *executableSchema) Complexity(ctx context.Context, typeName, field strin
 	_ = ec
 	switch typeName + "." + field {
 
+	case "Profile.accessStatus":
+		if e.complexity.Profile.AccessStatus == nil {
+			break
+		}
+
+		return e.complexity.Profile.AccessStatus(childComplexity), true
 	case "Profile.createdAt":
 		if e.complexity.Profile.CreatedAt == nil {
 			break
@@ -461,6 +468,35 @@ func (ec *executionContext) fieldContext_Profile_username(_ context.Context, fie
 	return fc, nil
 }
 
+func (ec *executionContext) _Profile_accessStatus(ctx context.Context, field graphql.CollectedField, obj *model.Profile) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Profile_accessStatus,
+		func(ctx context.Context) (any, error) {
+			return obj.AccessStatus, nil
+		},
+		nil,
+		ec.marshalNAccessStatus2githubᚗcomᚋFoxtrotᚑ14ᚋFitRangᚋanalysisᚑserviceᚋgraphᚋmodelᚐAccessStatus,
+		true,
+		true,
+	)
+}
+
+func (ec *executionContext) fieldContext_Profile_accessStatus(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Profile",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type AccessStatus does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Profile_profileUrl(ctx context.Context, field graphql.CollectedField, obj *model.Profile) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
@@ -578,6 +614,8 @@ func (ec *executionContext) fieldContext_Query_getProfiles(_ context.Context, fi
 				return ec.fieldContext_Profile_fullName(ctx, field)
 			case "username":
 				return ec.fieldContext_Profile_username(ctx, field)
+			case "accessStatus":
+				return ec.fieldContext_Profile_accessStatus(ctx, field)
 			case "profileUrl":
 				return ec.fieldContext_Profile_profileUrl(ctx, field)
 			case "createdAt":
@@ -2425,6 +2463,11 @@ func (ec *executionContext) _Profile(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "accessStatus":
+			out.Values[i] = ec._Profile_accessStatus(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "profileUrl":
 			out.Values[i] = ec._Profile_profileUrl(ctx, field, obj)
 		case "createdAt":
@@ -2959,6 +3002,16 @@ func (ec *executionContext) ___Type(ctx context.Context, sel ast.SelectionSet, o
 // endregion **************************** object.gotpl ****************************
 
 // region    ***************************** type.gotpl *****************************
+
+func (ec *executionContext) unmarshalNAccessStatus2githubᚗcomᚋFoxtrotᚑ14ᚋFitRangᚋanalysisᚑserviceᚋgraphᚋmodelᚐAccessStatus(ctx context.Context, v any) (model.AccessStatus, error) {
+	var res model.AccessStatus
+	err := res.UnmarshalGQL(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNAccessStatus2githubᚗcomᚋFoxtrotᚑ14ᚋFitRangᚋanalysisᚑserviceᚋgraphᚋmodelᚐAccessStatus(ctx context.Context, sel ast.SelectionSet, v model.AccessStatus) graphql.Marshaler {
+	return v
+}
 
 func (ec *executionContext) unmarshalNBoolean2bool(ctx context.Context, v any) (bool, error) {
 	res, err := graphql.UnmarshalBoolean(v)
