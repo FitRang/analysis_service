@@ -8,10 +8,6 @@ import (
 	"github.com/Foxtrot-14/FitRang/analysis-service/graph/model"
 )
 
-type verdictWrapper struct {
-	Verdict model.Verdict `json:"verdict"`
-}
-
 func (s *Service) GetVerdict(
 	ctx context.Context,
 	input model.VerdictInput,
@@ -39,11 +35,11 @@ func (s *Service) GetVerdict(
 	if err != nil {
 		return nil, err
 	}
-
+	clean := extractJSON(raw)
 	var wrapper verdictWrapper
-	if err := json.Unmarshal([]byte(raw), &wrapper); err != nil {
+	if err := json.Unmarshal([]byte(clean), &wrapper); err != nil {
 		return nil, err
 	}
 
-	return &wrapper.Verdict, nil
+	return finalSerialize(&wrapper.Verdict), nil
 }

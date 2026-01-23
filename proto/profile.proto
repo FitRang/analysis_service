@@ -6,7 +6,7 @@ option go_package = "github.com/Foxtrot-14/FitRang/analysis-service/proto;proto"
 
 service ProfileService {
   rpc GetProfilesByEmail(GetByEmailRequest) returns (GetProfilesResponse);
-  rpc GetDossierEmail(GetByEmailRequest) returns (GetDossierResponse);
+  rpc GetDossierByEmail(GetByEmailRequest) returns (GetDossierResponse);
   rpc GetDossierByUsername(GetByUsernameRequest) returns (GetDossierResponse);
 }
 

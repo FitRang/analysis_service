@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ProfileService_GetProfilesByEmail_FullMethodName   = "/profile.ProfileService/GetProfilesByEmail"
-	ProfileService_GetDossierEmail_FullMethodName      = "/profile.ProfileService/GetDossierEmail"
+	ProfileService_GetDossierByEmail_FullMethodName    = "/profile.ProfileService/GetDossierByEmail"
 	ProfileService_GetDossierByUsername_FullMethodName = "/profile.ProfileService/GetDossierByUsername"
 )
 
@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfileServiceClient interface {
 	GetProfilesByEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*GetProfilesResponse, error)
-	GetDossierEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*GetDossierResponse, error)
+	GetDossierByEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*GetDossierResponse, error)
 	GetDossierByUsername(ctx context.Context, in *GetByUsernameRequest, opts ...grpc.CallOption) (*GetDossierResponse, error)
 }
 
@@ -51,10 +51,10 @@ func (c *profileServiceClient) GetProfilesByEmail(ctx context.Context, in *GetBy
 	return out, nil
 }
 
-func (c *profileServiceClient) GetDossierEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*GetDossierResponse, error) {
+func (c *profileServiceClient) GetDossierByEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*GetDossierResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetDossierResponse)
-	err := c.cc.Invoke(ctx, ProfileService_GetDossierEmail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ProfileService_GetDossierByEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (c *profileServiceClient) GetDossierByUsername(ctx context.Context, in *Get
 // for forward compatibility.
 type ProfileServiceServer interface {
 	GetProfilesByEmail(context.Context, *GetByEmailRequest) (*GetProfilesResponse, error)
-	GetDossierEmail(context.Context, *GetByEmailRequest) (*GetDossierResponse, error)
+	GetDossierByEmail(context.Context, *GetByEmailRequest) (*GetDossierResponse, error)
 	GetDossierByUsername(context.Context, *GetByUsernameRequest) (*GetDossierResponse, error)
 	mustEmbedUnimplementedProfileServiceServer()
 }
@@ -91,8 +91,8 @@ type UnimplementedProfileServiceServer struct{}
 func (UnimplementedProfileServiceServer) GetProfilesByEmail(context.Context, *GetByEmailRequest) (*GetProfilesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProfilesByEmail not implemented")
 }
-func (UnimplementedProfileServiceServer) GetDossierEmail(context.Context, *GetByEmailRequest) (*GetDossierResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDossierEmail not implemented")
+func (UnimplementedProfileServiceServer) GetDossierByEmail(context.Context, *GetByEmailRequest) (*GetDossierResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDossierByEmail not implemented")
 }
 func (UnimplementedProfileServiceServer) GetDossierByUsername(context.Context, *GetByUsernameRequest) (*GetDossierResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDossierByUsername not implemented")
@@ -136,20 +136,20 @@ func _ProfileService_GetProfilesByEmail_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProfileService_GetDossierEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProfileService_GetDossierByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetByEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProfileServiceServer).GetDossierEmail(ctx, in)
+		return srv.(ProfileServiceServer).GetDossierByEmail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProfileService_GetDossierEmail_FullMethodName,
+		FullMethod: ProfileService_GetDossierByEmail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).GetDossierEmail(ctx, req.(*GetByEmailRequest))
+		return srv.(ProfileServiceServer).GetDossierByEmail(ctx, req.(*GetByEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -184,8 +184,8 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProfileService_GetProfilesByEmail_Handler,
 		},
 		{
-			MethodName: "GetDossierEmail",
-			Handler:    _ProfileService_GetDossierEmail_Handler,
+			MethodName: "GetDossierByEmail",
+			Handler:    _ProfileService_GetDossierByEmail_Handler,
 		},
 		{
 			MethodName: "GetDossierByUsername",

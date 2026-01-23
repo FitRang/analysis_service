@@ -544,10 +544,10 @@ const file_profile_proto_rawDesc = "" +
 	"\x19ACCESS_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15ACCESS_STATUS_PENDING\x10\x01\x12\x19\n" +
 	"\x15ACCESS_STATUS_GRANTED\x10\x02\x12\x19\n" +
-	"\x15ACCESS_STATUS_REVOKED\x10\x032\x80\x02\n" +
+	"\x15ACCESS_STATUS_REVOKED\x10\x032\x82\x02\n" +
 	"\x0eProfileService\x12N\n" +
-	"\x12GetProfilesByEmail\x12\x1a.profile.GetByEmailRequest\x1a\x1c.profile.GetProfilesResponse\x12J\n" +
-	"\x0fGetDossierEmail\x12\x1a.profile.GetByEmailRequest\x1a\x1b.profile.GetDossierResponse\x12R\n" +
+	"\x12GetProfilesByEmail\x12\x1a.profile.GetByEmailRequest\x1a\x1c.profile.GetProfilesResponse\x12L\n" +
+	"\x11GetDossierByEmail\x12\x1a.profile.GetByEmailRequest\x1a\x1b.profile.GetDossierResponse\x12R\n" +
 	"\x14GetDossierByUsername\x12\x1d.profile.GetByUsernameRequest\x1a\x1b.profile.GetDossierResponseB<Z:github.com/Foxtrot-14/FitRang/analysis-service/proto;protob\x06proto3"
 
 var (
@@ -578,10 +578,10 @@ var file_profile_proto_depIdxs = []int32{
 	6, // 1: profile.GetDossierResponse.dossier:type_name -> profile.Dossier
 	0, // 2: profile.Profile.access_status:type_name -> profile.AccessStatus
 	1, // 3: profile.ProfileService.GetProfilesByEmail:input_type -> profile.GetByEmailRequest
-	1, // 4: profile.ProfileService.GetDossierEmail:input_type -> profile.GetByEmailRequest
+	1, // 4: profile.ProfileService.GetDossierByEmail:input_type -> profile.GetByEmailRequest
 	2, // 5: profile.ProfileService.GetDossierByUsername:input_type -> profile.GetByUsernameRequest
 	3, // 6: profile.ProfileService.GetProfilesByEmail:output_type -> profile.GetProfilesResponse
-	4, // 7: profile.ProfileService.GetDossierEmail:output_type -> profile.GetDossierResponse
+	4, // 7: profile.ProfileService.GetDossierByEmail:output_type -> profile.GetDossierResponse
 	4, // 8: profile.ProfileService.GetDossierByUsername:output_type -> profile.GetDossierResponse
 	6, // [6:9] is the sub-list for method output_type
 	3, // [3:6] is the sub-list for method input_type

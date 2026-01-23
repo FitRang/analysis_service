@@ -17,7 +17,8 @@ Instructions:
 7. The user's color preferences matter but not too much, so keep that in consideration but not while calculating score.
 8. Be bold and suggest something that they may not have tried but will look good on them.
 9. The response will be in json format first parent object "verdict", within it: analysis, score and suitability.
-10. Directly give the json without anything else.
+10. If there is a name in profile section then address that person in third person. If profile says "Me" then address in second person.
+11. Directly give the json without anything else.
 
 --- PROFILE ---
 {user}

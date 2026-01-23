@@ -5,6 +5,8 @@ enum AccessStatus {
   OWNER
 }
 
+scalar Score
+
 type Profile {
   id: ID!
   fullName: String!

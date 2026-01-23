@@ -30,7 +30,7 @@ func SendRequest(
 	}
 	result, err := client.Models.GenerateContent(
 		ctx,
-		"gemini-3-flash-preview",
+		"gemini-2.5-flash",
 		genai.Text(prompt),
 		nil,
 	)

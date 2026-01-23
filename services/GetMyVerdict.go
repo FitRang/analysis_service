@@ -39,11 +39,11 @@ func (s *Service) GetMyVerdict(
 	if err != nil {
 		return nil, err
 	}
-
+	clean := extractJSON(raw)
 	var wrapper verdictWrapper
-	if err := json.Unmarshal([]byte(raw), &wrapper); err != nil {
+	if err := json.Unmarshal([]byte(clean), &wrapper); err != nil {
 		return nil, err
 	}
 
-	return &wrapper.Verdict, nil
+	return finalSerialize(&wrapper.Verdict), nil
 }

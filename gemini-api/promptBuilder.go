@@ -2,7 +2,6 @@ package geminiapi
 
 import (
 	_ "embed"
-	"os"
 	"strings"
 )
 
@@ -14,15 +13,11 @@ func promptBuilder(
 	dossier string,
 	product string,
 ) (string, error) {
-	template, err := os.ReadFile(promptTemplate)
-	if err != nil {
-		return "", err
-	}
-
 	replacer := strings.NewReplacer(
 		"{user}", profile,
 		"{dossier}", dossier,
 		"{product}", product,
 	)
-	return replacer.Replace(string(template)), nil
+
+	return replacer.Replace(promptTemplate), nil
 }
